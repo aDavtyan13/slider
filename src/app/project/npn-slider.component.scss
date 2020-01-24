@@ -1,0 +1,107 @@
+$bar-background-color: #EEEEEE;
+$bar-and-handle-color: #266EF0;
+$color--white: #FFFFFF;
+$tooltip--color: $color--white;
+$tooltip-border-color: #CDD3D7;
+$tooltip-border-radius: 7px;
+$text-color:#908f90;
+$bar-height: 20px;
+$bar-border-radius: 5px;
+$handle-tooltip-padding: (4px 9px);
+$handle-width-height: 42px;
+$margin-from-bar: 6px;
+$font-color: #4A5160;
+$font-weight: 600;
+$font-size: 16px;
+.slider,
+.slider * {
+  box-sizing: border-box;
+}
+.slider {
+  display: block;
+  width: 100%;
+  &_content {
+    width: 50%;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  .bar {
+    background: $bar-background-color;
+    height: $bar-height;
+    position: relative;
+    border-radius: $bar-border-radius;
+    &>span.left-handle,
+    &>span.right-handle {
+      display: inline-block;
+      width: $handle-width-height;
+      height: $handle-width-height;
+      background: $color--white;
+      border: 6px solid $bar-and-handle-color;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      transform: translate(-50%,-($handle-width-height - $bar-height)/2);
+      z-index: 1;
+      cursor: pointer;
+      transition: left 0.2s ease;
+      &.last-active {
+        z-index: 2;
+      }
+      & .handle-tooltip {
+        display: block;
+        position: absolute;
+        background-color: $tooltip--color;
+        bottom: $handle-width-height+$margin-from-bar;
+        border: 1px solid $tooltip-border-color;
+        border-radius: $tooltip-border-radius;
+        padding: $handle-tooltip-padding;
+        color: #4A5160;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: $font-weight;
+        font-size: $font-size;
+        transition: opacity 0.2s ease;
+        //&:after {
+        //  content: "";
+        //  top: 93%;
+        //  left: 38%;
+        //  width: 10px;
+        //  height: 10px;
+        //  border-left: 8px solid white;
+        //  border-top: 8px solid white;
+        //  position: absolute;
+        //  transform: rotate(45deg);
+        //  border-right: 2px solid #CDD3D7;
+        //  border-bottom: 2px solid #CDD3D7;
+        //}
+        &:before {
+          content: "";
+          border: 5px solid transparent;
+          border-top-color: $tooltip-border-color;
+          position: absolute;
+          top: 101%;
+          left: 38%;
+        }
+        &:after {
+          content: "";
+          border: 5px solid transparent;
+          border-top-color: $tooltip--color;
+          position: absolute;
+          top: 96%;
+          left: 38%;
+        }
+      }
+    }
+    div.filler {
+      &>span {
+        display: inline-block;
+        height: 100%;
+        position: absolute;
+        background: $bar-and-handle-color;
+        transition: all 0.2s ease;
+      }
+    }
+  }
+}
