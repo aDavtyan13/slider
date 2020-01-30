@@ -1,25 +1,23 @@
-$bar-background-color: #EEEEEE;
-$bar-and-handle-color: #266EF0;
-$color--white: #FFFFFF;
-$tooltip--color: $color--white;
-$tooltip-border-color: #CDD3D7;
+$color: ("main_color": #266EF0, "white": #FFFFFF, "bar_background_color": #EEEEEE, "tooltip_border_color": #CDD3D7, "text_color": #908f90);
+$tooltip--color: map-get($color, "white");
 $tooltip-border-radius: 7px;
-$text-color:#908f90;
 $bar-height: 20px;
 $bar-border-radius: 5px;
-$handle-tooltip-padding: (4px 9px);
+$handle-tooltip-padding: 4px 9px;
 $handle-width-height: 42px;
 $margin-from-bar: 6px;
-$font-color: #4A5160;
 $font-weight: 600;
 $font-size: 16px;
+
 .slider,
 .slider * {
   box-sizing: border-box;
 }
+
 .slider {
   display: block;
   width: 100%;
+
   &_content {
     width: 50%;
     margin: 0 auto;
@@ -27,34 +25,38 @@ $font-size: 16px;
     display: flex;
     align-items: center;
   }
+
   .bar {
-    background: $bar-background-color;
+    background: map-get($color, "bar_background_color");
     height: $bar-height;
     position: relative;
     border-radius: $bar-border-radius;
-    &>span.left-handle,
-    &>span.right-handle {
+
+    & > span.left-handle,
+    & > span.right-handle {
       display: inline-block;
       width: $handle-width-height;
       height: $handle-width-height;
-      background: $color--white;
-      border: 6px solid $bar-and-handle-color;
+      background: map-get($color, "white");
+      border: 6px solid map-get($color, "main_color");;
       border-radius: 50%;
       position: absolute;
       top: 0;
-      transform: translate(-50%,-($handle-width-height - $bar-height)/2);
+      transform: translate(-50%, -($handle-width-height - $bar-height) / 2);
       z-index: 1;
       cursor: pointer;
       transition: left 0.2s ease;
+
       &.last-active {
         z-index: 2;
       }
+
       & .handle-tooltip {
         display: block;
         position: absolute;
         background-color: $tooltip--color;
-        bottom: $handle-width-height+$margin-from-bar;
-        border: 1px solid $tooltip-border-color;
+        bottom: $handle-width-height + $margin-from-bar;
+        border: 1px solid map-get($color, "tooltip_border_color");
         border-radius: $tooltip-border-radius;
         padding: $handle-tooltip-padding;
         color: #4A5160;
@@ -79,11 +81,12 @@ $font-size: 16px;
         &:before {
           content: "";
           border: 5px solid transparent;
-          border-top-color: $tooltip-border-color;
+          border-top-color: map-get($color, "tooltip_border_color");
           position: absolute;
           top: 101%;
           left: 38%;
         }
+
         &:after {
           content: "";
           border: 5px solid transparent;
@@ -94,12 +97,13 @@ $font-size: 16px;
         }
       }
     }
+
     div.filler {
-      &>span {
+      & > span {
         display: inline-block;
         height: 100%;
         position: absolute;
-        background: $bar-and-handle-color;
+        background: map_get($color, "main_color");
         transition: all 0.2s ease;
       }
     }
